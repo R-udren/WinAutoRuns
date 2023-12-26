@@ -1,16 +1,17 @@
 import dearpygui.dearpygui as dpg
+from reg_runs import reg_runs
 
 width = 800
 height = 600
 
 # Create DearPyGui context and viewport
 dpg.create_context()
-dpg.create_viewport(title="Main", width=width, height=height)
+dpg.create_viewport(title="WinAutoRuns", width=width, height=height, small_icon="resources/icons/empty_head.ico")
 
 # Load fonts
 with dpg.font_registry():
-    default_font = dpg.add_font("fonts/Rubik-Regular.ttf", 32)
-    custom_font = dpg.add_font("fonts/Rubik-Bold.ttf", 84)
+    default_font = dpg.add_font("resources/fonts/Rubik-Regular.ttf", 32)
+    custom_font = dpg.add_font("resources/fonts/Rubik-Bold.ttf", 84)
 
 
 # Callbacks
@@ -46,13 +47,13 @@ with dpg.window(no_collapse=True, no_resize=True, no_title_bar=True) as main_men
         dpg.add_button(label="Quit", callback=lambda: dpg.stop_dearpygui())
 
 # Registry Viewer window
-with dpg.window(label="Registry Viewer", pos=(width // 2 - 200, height // 2 - 200), width=400, height=400,
+with dpg.window(label="Registry Viewer", pos=(width // 2 - 200, height // 2 - 200),
                 show=False) as registry_viewer_window:
     dpg.add_text("Registry Viewer")
     dpg.add_button(label="Back", callback=return_to_main_menu)
 
 # Options window
-with dpg.window(label="Options", pos=(width // 2 - 200, height // 2 - 200), width=400, height=400,
+with dpg.window(label="Options", pos=(width // 2 - 200, height // 2 - 200),
                 show=False) as options_window:
     dpg.add_text("Options")
     dpg.add_button(label="Back", callback=return_to_main_menu)
