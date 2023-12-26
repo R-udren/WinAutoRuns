@@ -46,7 +46,7 @@ def extract_hive_key(registry_path: str) -> Tuple[int, str]:
     return key, subkey
 
 
-def main():
+def reg_runs():
     paths = load_reg_paths("paths.json")
     registry_paths = paths.get("registry_paths", [])
 
@@ -55,7 +55,7 @@ def main():
         if key is not None:
             reg_values = get_reg_values(key, subkey)
             if reg_values:
-                pp(reg_values)
+                yield reg_values
 
 
 if __name__ == "__main__":
