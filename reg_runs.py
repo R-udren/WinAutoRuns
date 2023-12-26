@@ -52,10 +52,16 @@ def reg_runs():
 
     for registry_path in registry_paths:
         key, subkey = extract_hive_key(registry_path)
-        if key is not None:
-            reg_values = get_reg_values(key, subkey)
-            if reg_values:
-                yield reg_values
+        if key is None or subkey is None:
+            continue
+        reg_values = get_reg_values(key, subkey)
+        if reg_values:
+            yield reg_values
+
+
+def main():
+    for reg_values in reg_runs():
+        pp(reg_values)
 
 
 if __name__ == "__main__":
