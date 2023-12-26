@@ -26,6 +26,11 @@ def get_reg_values(key: int, subkey: str) -> Dict[str, Union[str, int]]:
                 reg_values[name] = value
     except PermissionError as pe:
         logger.error(f"Permission error: Unable to open registry key {subkey}: {pe}")
+    except WindowsError as we:
+        if we.errno == 2:
+            logger.info(f"Windows error: Cannot open registry key {subkey}: {we.args[1]}")
+        else:
+            logger.error(f"Windows error: Unable to open registry key {subkey}: {we}")
     except Exception as e:
         logger.error(f"Error reading registry key {subkey}: {e}")
     return reg_values
@@ -49,7 +54,8 @@ def main():
         key, subkey = extract_hive_key(registry_path)
         if key is not None:
             reg_values = get_reg_values(key, subkey)
-            pp(reg_values)
+            if reg_values:
+                pp(reg_values)
 
 
 if __name__ == "__main__":

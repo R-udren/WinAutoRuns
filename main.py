@@ -1,6 +1,8 @@
+import reg_runs
+
+
 def main():
-    print("Many great things have started in way like this.")
-    print("hello world")
+    print(reg_runs.__name__)
 
 
 if __name__ == "__main__":
